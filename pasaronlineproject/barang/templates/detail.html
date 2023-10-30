@@ -1,0 +1,26 @@
+{% extends 'base.html'%} 
+{% block content %}
+<!-- Tampilan sayuran ketika di-klik-->
+<div class="card m-3">
+    <!-- gambar -->
+    <img alt="" class="card-img-top" src="{{ barang.gambar.url }}" />
+    <!-- nama sayur -->
+    <div class="card-body">
+        <h5 class="card-title fw-bold">
+        {{ barang.nama }} | Harga : Rp{{ barang.harga }}
+        </h5>
+        <!-- keterangan sayur -->
+        <p class="card-text">
+        {{ barang.keterangan }}
+        <br />
+        </p>
+        <form method="post" action="{% url 'add_to_cart' barang.id %}">
+        {% csrf_token %}
+        <!--jumlah pesanan dan tombol pesan-->
+        <label for="quantity">Jumlah Pesanan:</label>
+        <input type="number" name="quantity" id="quantity" value="1" min="1" />
+        <button type="submit" class="btn btn-success">Pesan</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,86 @@
+{% extends 'base.html'%} 
+{% block content %}
+
+<!-- Carousel -->
+<br />
+<div id="carouselExampleCaptions" class="carousel slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                {% load static %}
+                <img src="{% static 'images/c1.jpg' %}" class="d-block w-100" alt="..." style="height: 350px;">
+                <div class="carousel-caption">
+                    <h5>Sayuran Berkualitas</h5>
+                    <p>Sayuran di sini merupakan sayuran yang berkualitas karena sudah dijaga kualitas nya.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                {% load static %}
+                <img src="{% static 'images/c3.jpg' %}" class="d-block w-100" alt="..."  style="height: 350px;">
+                <div class="carousel-caption">
+                    <h5>Dari Petani Profesional</h5>
+                    <p>Kami menyediakan sayuran yang dipasok langsung dari petani-petani profesional dan berpengalaman dari pegunungan.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                {% load static %}
+                <img src="{% static 'images/c2jpg.jpg' %}" class="d-block w-100" alt="..."  style="height: 350px;">
+                <div class="carousel-caption">
+                    <h5>Kualitas Bagus dan murah</h5>
+                    <p>Karena dipasok langsung dari petani, kami menyediakan sayuran yang murah dan berkualitas. Ayo buruan beli!.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+</div>
+<br />
+<!-- Konten dikit -->
+<h2>Selamat Datang Di Pasar Online App</h2>
+<p>Pusat sayuran yang berkualitas dan fresh juga murah meriah.</p>
+<br />
+<!-- Search Bar-->
+<div class="container">
+    <form action="">
+        <div class="mb-3">
+        <label class="form-label"><strong>Cari Sayuran:</strong></label>
+        <input type="text" name="nama" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    {% if searchBarang %} Pencarian untuk <strong>{{ searchBarang }}</strong>
+    {% endif %}
+    <br />
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for barang in barangs %}
+        <div class="col">
+        <div class="card">
+            <img alt="" class="card-img-top" src="{{ barang.gambar.url }}" />
+            <div class="card-body">
+            <h5 class="card-title fw-bold">
+                {{ barang.nama }} | Rp{{ barang.harga }}
+            </h5>
+            <p class="card-text">
+                Stok : {{ barang.stok }}
+                <br />
+                <a href="{% url 'detail' barang.id %}" class="text-decoration-none">
+                <h5 class="card-title fw-bold">Detail</h5>
+                </a>
+            </p>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}
